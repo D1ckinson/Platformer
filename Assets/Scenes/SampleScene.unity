@@ -205,7 +205,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 29848857}
   _patrolPointsParent: {fileID: 2129699152}
-  _speed: 0.25
+  _speed: 1
 --- !u!212 &29848851
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6243,8 +6243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _coin: {fileID: 5713672068977553256, guid: 6e105f25402f111409822a07a6bbcf84, type: 3}
   _delay: 1.5
-  _xForce: 2
-  _yForce: 5
+  _spawnForce: {x: 2, y: 5}
 --- !u!4 &1653566457
 Transform:
   m_ObjectHideFlags: 0

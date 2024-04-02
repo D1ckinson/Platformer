@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+[RequireComponent (typeof(Rigidbody2D))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class Enemy : MonoBehaviour
 {
     private const float PhysicsFactor = 100;
@@ -34,21 +36,18 @@ public class Enemy : MonoBehaviour
 
     private void Move()
     {
-        if (IsPatrolPointNear())        
-            _index = (_index + 1) % _patrolXCoordinates.Length;       
+        if (IsPatrolPointNear())
+            _index = (_index + 1) % _patrolXCoordinates.Length;
 
         float direction = _patrolXCoordinates[_index] - transform.position.x;
+        direction /= Mathf.Abs(direction);
         float distance = direction * _speed * Time.deltaTime;
 
         _spriteRenderer.flipX = direction < 0;
         _rigidbody.velocity = new(distance * PhysicsFactor, _rigidbody.velocity.y);
     }
 
-    private bool IsPatrolPointNear()
-    {
-        if (_patrolXCoordinates[_index] - _patroolDeviation < transform.position.x && transform.position.x < _patrolXCoordinates[_index] + _patroolDeviation)        
-            return true;        
-
-        return false;
-    }
+    private bool IsPatrolPointNear() =>
+        _patrolXCoordinates[_index] - _patroolDeviation < transform.position.x &&
+        transform.position.x < _patrolXCoordinates[_index] + _patroolDeviation;
 }

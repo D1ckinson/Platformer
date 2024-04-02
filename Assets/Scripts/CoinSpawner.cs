@@ -5,8 +5,7 @@ public class CoinSpawner : MonoBehaviour
 {
     [SerializeField] private Coin _coin;
     [SerializeField] private float _delay;
-    [SerializeField] private float _xForce;
-    [SerializeField] private float _yForce;
+    [SerializeField] private Vector2 _spawnForce;
 
     private WaitForSeconds _sleep;
 
@@ -21,16 +20,16 @@ public class CoinSpawner : MonoBehaviour
         while (true)
         {
             Coin coin = Instantiate(_coin, transform.position, Quaternion.identity);
-            coin.GetComponent<Rigidbody2D>().AddForce(GetForce(), ForceMode2D.Impulse);
+            coin.GetComponent<Rigidbody2D>().AddForce(GetForceVector(_spawnForce), ForceMode2D.Impulse);
 
             yield return _sleep;
         }
     }
 
-    private Vector2 GetForce()
+    private Vector2 GetForceVector(Vector2 vector)
     {
-        float xForce = Random.Range(-_xForce, _xForce);
+        vector.x = Random.Range(-vector.x, vector.x); ;
 
-        return new(xForce, _yForce);
+        return vector;
     }
 }
