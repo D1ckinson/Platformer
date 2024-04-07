@@ -704,7 +704,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e2814bce1d2cf24093aeb5fd86b8e1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 1040437949}
+  _player: {fileID: 0}
 --- !u!1 &528736028
 GameObject:
   m_ObjectHideFlags: 0
@@ -6407,12 +6407,12 @@ GameObject:
   - component: {fileID: 1040437953}
   - component: {fileID: 1040437955}
   - component: {fileID: 1040437954}
-  - component: {fileID: 1040437949}
   - component: {fileID: 1040437957}
   - component: {fileID: 1040437958}
   - component: {fileID: 1040437959}
   - component: {fileID: 1040437960}
   - component: {fileID: 1040437961}
+  - component: {fileID: 1040437962}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -6420,23 +6420,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1040437949
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1040437948}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c996bc4833816a94583271a52be7078d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _moveSpeed: 25
-  _jumpHeight: 8
-  _groundMask:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!212 &1040437950
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6627,6 +6610,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 30
+--- !u!114 &1040437962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1040437948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70792eb69f050834b82de2794b1d42ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moveSpeed: 25
+  _jumpHeight: 8
+  _groundMask:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &1653566455
 GameObject:
   m_ObjectHideFlags: 0
