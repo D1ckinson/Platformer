@@ -10,16 +10,16 @@ public class EnemyMovement : MonoBehaviour
 
     private Rigidbody2D _rigidbody;
     private Action _move;
-    private Transform[] _patrolpointsTransform;
+    private Transform[] _patrolPointsTransform;
     private float _searchDistance = 50f;
     private int _index;
 
     private void Awake()
     {
-        _patrolpointsTransform = new Transform[_patrolPointsParent.childCount];
+        _patrolPointsTransform = new Transform[_patrolPointsParent.childCount];
 
         for (int i = 0; i < _patrolPointsParent.childCount; i++)
-            _patrolpointsTransform[i] = _patrolPointsParent.GetChild(i).transform;
+            _patrolPointsTransform[i] = _patrolPointsParent.GetChild(i).transform;
 
         _rigidbody = GetComponent<Rigidbody2D>();
     }
@@ -33,8 +33,8 @@ public class EnemyMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.transform == _patrolpointsTransform[_index])
-            _index = (_index + 1) % _patrolpointsTransform.Length;
+        if (collision.transform == _patrolPointsTransform[_index])
+            _index = (_index + 1) % _patrolPointsTransform.Length;
     }
 
     private bool SearchPlayer() =>
@@ -45,7 +45,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void FollowPatrolPoints()
     {
-        float direction = _patrolpointsTransform[_index].position.x - transform.position.x;
+        float direction = _patrolPointsTransform[_index].position.x - transform.position.x;
         direction /= Mathf.Abs(direction);
 
         float velocityX = direction * _speed;

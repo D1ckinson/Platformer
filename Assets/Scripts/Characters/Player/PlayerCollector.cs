@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Health))]
-public class PlayerСollector : MonoBehaviour
+public class PlayerCollector : MonoBehaviour
 {
     [SerializeField] private Health _health;
 
