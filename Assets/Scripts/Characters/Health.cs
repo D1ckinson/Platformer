@@ -16,7 +16,7 @@ public class Health : MonoBehaviour
     {
         float value = Value - damage;
 
-        if (value < 0)
+        if (value <= 0)
         {
             Destroy(gameObject);
             return;
