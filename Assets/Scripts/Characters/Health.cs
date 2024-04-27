@@ -6,24 +6,23 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     public event Action ValueChanged;
-    //[SerializeField] private float _value;
-    //public float CurrentValue => _value;
 
-    [field: SerializeField] public float _maxValue { get; private set; }
-    [field: SerializeField] public float _value { get; private set; }
+    [field: SerializeField] public float MaxValue { get; private set; }
+    [field: SerializeField] public float Value { get; private set; }
 
-    public bool IsFull => _value == _maxValue;
-    private bool IsAlive => _value > 0;
-
-    private void Update()
-    {
-        if (IsAlive == false)
-            Destroy(gameObject);
-    }
+    public bool IsFull => Value == MaxValue;
 
     public void TakeDamage(float damage)
     {
-        _value -= damage;
+        float value = Value - damage;
+
+        if (value < 0)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Value = value;
 
         ValueChanged?.Invoke();
     }
@@ -33,8 +32,8 @@ public class Health : MonoBehaviour
         if (IsFull)
             return;
 
-        float health = _value + medkit.Heal;
-        _value = health > _maxValue ? _maxValue : health;
+        float health = Value + medkit.Heal;
+        Value = health > MaxValue ? MaxValue : health;
 
         ValueChanged?.Invoke();
         Destroy(medkit.gameObject);

@@ -17,5 +17,5 @@ public class TextHealth : MonoBehaviour
         _health.ValueChanged -= RenderHealth;
 
     private void RenderHealth() =>
-        _text.text = $"{_health._value}/{_health._maxValue}";
+        _text.text = $"{_health.Value}/{_health.MaxValue}";
 }

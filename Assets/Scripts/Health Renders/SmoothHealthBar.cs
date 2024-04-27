@@ -8,7 +8,7 @@ public class SmoothHealthBar : SliderBar
 
     private IEnumerator MoveSlider()
     {
-        while (_slider.value > _health._value / _health._maxValue)
+        while (_slider.value > _health.Value / _health.MaxValue)
         {
             _slider.value -= Time.deltaTime;
 
