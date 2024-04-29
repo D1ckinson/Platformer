@@ -32,10 +32,19 @@ public class Health : MonoBehaviour
         if (IsFull)
             return;
 
-        float health = Value + medkit.Heal;
+        AddValue(medkit.Heal);
+
+        Destroy(medkit.gameObject);
+    }
+
+    public void Heal(float heal) =>
+        AddValue(heal);
+
+    private void AddValue(float value)
+    {
+        float health = Value + value;
         Value = health > MaxValue ? MaxValue : health;
 
         ValueChanged?.Invoke();
-        Destroy(medkit.gameObject);
     }
 }

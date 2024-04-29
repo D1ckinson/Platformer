@@ -3,18 +3,18 @@ using UnityEngine.UI;
 
 public abstract class SliderBar : MonoBehaviour
 {
-    [SerializeField] protected Slider _slider;
-    [SerializeField] protected Health _health;
+    [SerializeField] protected Slider Slider;
+    [SerializeField] protected Health Health;
 
     private void Awake()
     {
         RenderHealth();
 
-        _health.ValueChanged += RenderHealth;
+        Health.ValueChanged += RenderHealth;
     }
 
     private void OnDisable() =>
-        _health.ValueChanged -= RenderHealth;
+        Health.ValueChanged -= RenderHealth;
 
     protected abstract void RenderHealth();
 }

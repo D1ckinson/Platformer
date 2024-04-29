@@ -8,11 +8,11 @@ public class SmoothHealthBar : SliderBar
 
     private IEnumerator MoveSlider()
     {
-        float currentValue = _health.Value / _health.MaxValue;
+        float currentValue = Health.Value / Health.MaxValue;
 
-        while (_slider.value != currentValue)
+        while (Slider.value != currentValue)
         {
-            _slider.value = Mathf.MoveTowards(_slider.value, currentValue, Time.deltaTime);
+            Slider.value = Mathf.MoveTowards(Slider.value, currentValue, Time.deltaTime);
 
             yield return null;
         }
