@@ -14,7 +14,6 @@ public class InputReader : MonoBehaviour
         bool isVerticalKeyDown = Input.GetKey(_jumpKey);
         float axis = Input.GetAxis(Horizontal);
 
-        if (axis != 0 || isVerticalKeyDown)
-            InputReceived?.Invoke(axis, isVerticalKeyDown);
+        InputReceived?.Invoke(axis, isVerticalKeyDown);
     }
 }
