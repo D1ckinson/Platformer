@@ -6,6 +6,7 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     public event Action ValueChanged;
+    public event Action ValueOver;
 
     [field: SerializeField] public float MaxValue { get; private set; }
     [field: SerializeField] public float Value { get; private set; }
@@ -14,15 +15,16 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        float value = Value - damage;
+        if (damage < 0)
+            return;
 
-        if (value <= 0)
+        Value = Mathf.Clamp(Value - damage, 0, MaxValue);
+
+        if (Value == 0)
         {
-            Destroy(gameObject);
+            ValueOver?.Invoke();
             return;
         }
-
-        Value = value;
 
         ValueChanged?.Invoke();
     }
@@ -32,18 +34,24 @@ public class Health : MonoBehaviour
         if (IsFull)
             return;
 
-        AddValue(medkit.Heal);
+        if (medkit.Heal < 0)
+            return;
 
+        AddValue(medkit.Heal);
         Destroy(medkit.gameObject);
     }
 
-    public void Heal(float heal) =>
+    public void Heal(float heal)
+    {
+        if (heal < 0)
+            return;
+
         AddValue(heal);
+    }
 
     private void AddValue(float value)
     {
-        float health = Value + value;
-        Value = health > MaxValue ? MaxValue : health;
+        Value = Mathf.Clamp(Value + value, 0, MaxValue);
 
         ValueChanged?.Invoke();
     }

@@ -9,36 +9,48 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _jumpHeight;
-    [SerializeField] private LayerMask _groundMask;
+    [SerializeField] private LayerMask _ground;
+    [SerializeField] private InputReader _inputReader;
 
     private float _rayDistance = 0.6f;
-    private KeyCode _jumpKey = KeyCode.Space;
     private Rigidbody2D _rigidbody;
+    private float _direction;
+    private bool _isJumping;
 
-    private void Awake() =>
-        _rigidbody = GetComponent<Rigidbody2D>();
-
-    private void Update()
+    private void Awake()
     {
-        Move();
-        Jump();
+        _rigidbody = GetComponent<Rigidbody2D>();
+        _inputReader.InputReceived += ReadInput;
     }
 
-    private void Move()
+    private void FixedUpdate()
     {
-        float direction = Input.GetAxis(Horizontal);
+        Move(_direction);
+        Jump(_isJumping);
+    }
+
+    private void ReadInput(float direction, bool isJumping)
+    {
+        _direction = direction;
+        _isJumping = isJumping;
+    }
+
+    private void Move(float direction)
+    {
         float distance = direction * _moveSpeed;
 
         _rigidbody.velocity = new(distance * PhysicsFactor * Time.deltaTime, _rigidbody.velocity.y);
     }
 
-    private void Jump()
+    private void Jump(bool isJumping)
     {
-        if (Input.GetKeyDown(_jumpKey))
-            if (OnGround())
-                _rigidbody.AddForce(_jumpHeight * Vector2.up, ForceMode2D.Impulse);
+        if (isJumping == false)
+            return;
+
+        if (OnGround())
+            _rigidbody.AddForce(_jumpHeight * Vector2.up, ForceMode2D.Impulse);
     }
 
     private bool OnGround() =>
-        Physics2D.Raycast(_rigidbody.position, Vector2.down, _rayDistance, _groundMask);
+        Physics2D.Raycast(_rigidbody.position, Vector2.down, _rayDistance, _ground);
 }
