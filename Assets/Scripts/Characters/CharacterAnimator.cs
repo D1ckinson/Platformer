@@ -16,10 +16,10 @@ public class CharacterAnimator : MonoBehaviour
 
     private void Update()
     {
-        bool inIdle = _rigidbody.velocity.x == 0;
+        bool inIdle = _rigidbody.velocity == Vector2.zero;
 
         _animator.SetBool(InIdle, inIdle);
         _animator.SetFloat(XSpeed, _rigidbody.velocity.x);
         _animator.SetFloat(YSpeed, _rigidbody.velocity.y);
-    }    
+    }
 }
